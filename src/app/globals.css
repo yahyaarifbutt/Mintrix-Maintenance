@@ -10,6 +10,12 @@
   /* Custom Animations for that 'Professional' feel */
   --animate-fade-in: fade-in 0.5s ease-out;
 }
+/* Only applies to mobile to account for the sticky CTA bar */
+@media (max-width: 767px) {
+  footer {
+    padding-bottom: 80px; 
+  }
+}
 
 @layer base {
   body {

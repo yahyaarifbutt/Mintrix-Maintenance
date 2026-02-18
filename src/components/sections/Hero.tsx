@@ -1,67 +1,113 @@
 // src/components/sections/Hero.tsx
+"use client";
 import React from 'react';
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion'; // Added Variants import
+import { ShieldCheck, Zap, Clock, Star } from 'lucide-react';
 
 export default function Hero() {
+  // Explicitly typing the variants as 'Variants' resolves the easing array mismatch
+  const itemVars: Variants = {
+    initial: { y: 30, opacity: 0 },
+    animate: { 
+      y: 0, 
+      opacity: 1, 
+      transition: { 
+        duration: 0.8, 
+        // Using a type assertion (as [number, number, number, number]) 
+        // ensures TypeScript accepts the cubic-bezier array
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number] 
+      } 
+    }
+  };
+
   return (
-    <section className="relative bg-heavy-metal text-ecru-white pt-16 pb-24 px-6 overflow-hidden">
-      {/* Background Accent - subtle gold glow */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-old-gold/5 blur-[120px] pointer-events-none" />
+    <section className="relative bg-heavy-metal text-ecru-white min-h-[90vh] flex items-center pt-32 pb-32 px-8 md:px-12 overflow-hidden">
+      
+      {/* 1. LAYER: Background Depth */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+      <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-old-gold/10 to-transparent blur-[180px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
-        <div className="animate-fade-in">
-          <h2 className="text-old-gold font-bold tracking-[0.3em] text-sm mb-4">
-            MAINTENANCE MADE FAST
-          </h2>
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-[1.1]">
-            Premium Maintenance. <br />
-            <span className="text-old-gold">Zero Hassle.</span>
-          </h1>
-          <p className="text-lg text-dove-gray mb-10 max-w-md leading-relaxed">
-            Expert maintenance for luxury homes, offices, and buildings across Dubai. 
-            Target arrival within <span className="text-ecru-white font-bold">90 minutes</span> or we waive 50% of the service charge.
-          </p>
+      {/* 2. LAYER: Branding Watermark */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 pointer-events-none select-none z-0 opacity-[0.01]">
+        <span className="text-[20rem] md:text-[40rem] font-black uppercase italic tracking-tighter">MINTRIX</span>
+      </div>
+
+      <div className="max-w-[1440px] mx-auto w-full relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
-          <div className="flex flex-wrap gap-4">
-            <button className="bg-old-gold text-heavy-metal px-10 py-4 font-bold rounded-sm hover:brightness-110 transition-all shadow-lg shadow-old-gold/10">
-              Book a Service
-            </button>
-            <button className="border border-dove-gray/30 text-ecru-white px-10 py-4 font-bold rounded-sm hover:bg-ecru-white hover:text-heavy-metal transition-all">
-              Our Services
-            </button>
-          </div>
-        </div>
-
-        {/* Right Side: Professional Image with Badge */}
-        <div className="relative group">
-          <div className="relative z-10 rounded-xl overflow-hidden border border-old-gold/20 shadow-2xl">
-            {/* Replace /technicians.jpg with your actual file path in the public folder */}
-            <Image 
-              src="/hero-image.png" 
-              alt="Mintrix Maintenance Technicians" 
-              width={800} 
-              height={600}
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              priority
-            />
-          </div>
-
-          {/* Floating 90 Min Badge */}
-          <div className="absolute -bottom-6 -left-6 z-20 bg-heavy-metal border-2 border-old-gold p-6 shadow-2xl">
-            <div className="text-center">
-              <span className="block text-5xl font-black text-old-gold leading-none">90</span>
-              <span className="block text-xs font-bold tracking-widest text-ecru-white mt-1 uppercase">
-                Minutes
+          {/* --- LEFT SIDE: Content --- */}
+          <motion.div 
+            initial="initial"
+            animate="animate"
+            className="relative z-20"
+          >
+            <motion.div variants={itemVars} className="inline-flex items-center gap-4 bg-old-gold/10 border border-old-gold/20 px-4 py-2 mb-8">
+              <div className="w-2 h-2 rounded-full bg-old-gold animate-pulse" />
+              <span className="text-[10px] font-black tracking-[0.4em] uppercase text-old-gold">
+                Available 24/7 Across Dubai
               </span>
-              <div className="h-[2px] w-full bg-old-gold/30 my-2"></div>
-              <p className="text-[10px] font-bold text-dove-gray leading-tight uppercase">
-                Target Arrival
+            </motion.div>
+
+            <h1 className="text-6xl md:text-7xl lg:text-[8.5rem] font-black leading-[0.9] tracking-tighter uppercase italic flex flex-col">
+              <motion.span variants={itemVars} className="block text-ecru-white">Premium</motion.span>
+              <motion.span variants={itemVars} className="text-old-gold block">Maintenance.</motion.span>
+              <motion.span variants={itemVars} className="block text-ecru-white">Zero Hassle.</motion.span>
+            </h1>
+
+            <motion.div variants={itemVars} className="mt-10 max-w-xl border-l-4 border-old-gold pl-8">
+              <p className="text-lg md:text-xl text-dove-gray font-medium leading-relaxed">
+                Expert maintenance for luxury homes and buildings. 
+                Arrival within <span className="text-ecru-white font-bold underline decoration-old-gold decoration-4 underline-offset-4">90 minutes</span> or we waive 50% of the charge.
               </p>
+            </motion.div>
+            
+            <motion.div variants={itemVars} className="mt-12 flex flex-wrap gap-8 items-center">
+              <button className="bg-old-gold text-heavy-metal px-12 py-6 font-black text-xs uppercase tracking-[0.25em] transition-all hover:bg-white shadow-xl">
+                Book a Service
+              </button>
+              
+              <div className="flex items-center gap-5 border-l border-white/10 pl-8">
+                <div className="flex -space-x-3">
+                  {[1,2,3].map(i => (
+                    <div key={i} className="w-10 h-10 rounded-full border-2 border-heavy-metal bg-dove-gray shadow-xl" />
+                  ))}
+                </div>
+                <div className="text-[10px] font-black uppercase tracking-tighter">
+                  <p className="text-ecru-white">Trusted by 12k+</p>
+                  <p className="text-old-gold flex items-center gap-1">Elite Dubai <Star size={8} className="fill-old-gold" /></p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* --- RIGHT SIDE: Image --- */}
+          <div className="relative mt-16 lg:mt-0 lg:-mt-10">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2 }}
+              className="relative z-10 aspect-[3/4] rounded-sm overflow-hidden border border-white/10 shadow-3xl"
+            >
+              <Image 
+                src="/hero-image.jpg" 
+                alt="Mintrix Professional Maintenance Team" 
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-heavy-metal via-transparent to-transparent opacity-60" />
+            </motion.div>
+
+            <div className="absolute -bottom-10 -left-10 z-30 bg-heavy-metal border-t-4 border-old-gold p-10 shadow-2xl min-w-[200px]">
+              <div className="text-center">
+                <span className="block text-8xl font-black text-old-gold leading-none tracking-tighter">90</span>
+                <span className="block text-[11px] font-black tracking-[0.4em] text-ecru-white mt-4 uppercase">Minutes</span>
+                <p className="text-[9px] font-bold text-dove-gray mt-2 uppercase tracking-widest opacity-60">Target Arrival</p>
+              </div>
             </div>
           </div>
-          
-          {/* Decorative Gold Frame element */}
-          <div className="absolute -top-4 -right-4 w-24 h-24 border-t-2 border-r-2 border-old-gold/40 z-0" />
+
         </div>
       </div>
     </section>

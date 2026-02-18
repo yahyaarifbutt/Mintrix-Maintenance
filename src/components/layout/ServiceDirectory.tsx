@@ -1,21 +1,29 @@
 // src/components/layout/ServiceDirectory.tsx
-export default function ServiceDirectory() {
-  const allServices = [
-    "AC Service", "MEP Service", "DEWA Projects", "Appliance Repair", 
-    "Hardware Maintenance", "Software Maintenance", "Data Backup", 
-    "System Cleaning", "Virus Protection", "Printer Maintenance", 
-    "Email Maintenance", "Performance Monitoring", "Disk Maintenance"
-  ];
+import Link from 'next/link';
+import { services } from '@/lib/services-data';
 
+export default function ServiceDirectory() {
   return (
-    <div className="bg-heavy-metal py-10 border-t border-old-gold/20">
-      <div className="max-w-7xl mx-auto px-6">
-        <p className="text-old-gold font-bold text-xs tracking-widest mb-6 uppercase">Quick Service Directory</p>
-        <div className="flex flex-wrap gap-x-6 gap-y-3">
-          {allServices.map((s, i) => (
-            <span key={i} className="text-dove-gray text-[11px] font-medium hover:text-ecru-white cursor-default transition-colors">
-              {s} {i !== allServices.length - 1 && "•"}
-            </span>
+    <div className="bg-heavy-metal py-16 border-t border-old-gold/10">
+      <div className="max-w-[1440px] mx-auto px-8 md:px-12">
+        <p className="text-old-gold font-black text-[10px] tracking-[0.4em] mb-8 uppercase opacity-80">
+          Quick Service Directory
+        </p>
+        
+        <div className="flex flex-wrap gap-x-8 gap-y-4">
+          {services.map((s, i) => (
+            <div key={s.slug} className="flex items-center gap-x-8">
+              {/* Changed: <span> to <Link> for SEO and navigation */}
+              <Link 
+                href={`/services/${s.slug}`}
+                className="text-dove-gray text-xs font-semibold hover:text-old-gold transition-all duration-300"
+              >
+                {s.title}
+              </Link>
+              {i !== services.length - 1 && (
+                <span className="w-1 h-1 bg-old-gold/30 rounded-full"></span>
+              )}
+            </div>
           ))}
         </div>
       </div>
