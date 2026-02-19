@@ -109,12 +109,5 @@ export const services: Service[] = [
     longDescription: "Constant vigilance over your technical assets. We use advanced telemetry to predict failures before they happen, allowing for proactive maintenance.",
     features: ["Uptime Tracking", "Resource Usage Logs", "Predictive Analytics", "Alert Configuration"]
   },
-  {
-    title: "Disk Maintenance",
-    slug: "disk-maintenance",
-    category: "IT & Systems",
-    description: "Drive health diagnostics and storage life extension.",
-    longDescription: "Ensuring the longevity of your storage media. We perform sector checks, SMART data analysis, and storage repartitioning to maintain drive health.",
-    features: ["Bad Sector Recovery", "SMART Diagnostics", "Partition Resizing", "Write Speed Testing"]
-  }
+
 ];
