@@ -3,14 +3,14 @@ import React from 'react';
 import Link from "next/link";
 import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck, Clock, MapPin } from "lucide-react";
-import BackgroundGrid from '@/components/ui/BackgroundGrid';
+
 
 export default function HomeCTA() {
   return (
     <section className="relative bg-ecru-white py-20 md:py-40 px-6 md:px-12 overflow-hidden border-t border-heavy-metal/10">
       
       {/* --- BLUEPRINT BACKGROUND --- */}
-      <BackgroundGrid />
+      
       
       {/* Soft radial glow to keep center text crisp */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[600px] h-[600px] bg-old-gold/5 blur-[80px] md:blur-[120px] rounded-full pointer-events-none" />
