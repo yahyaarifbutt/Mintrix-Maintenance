@@ -24,7 +24,7 @@ export default function SpecializedServices() {
         <div className="w-full lg:w-1/2 relative group">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm border-l-[12px] border-old-gold shadow-3xl">
             <Image 
-              src="/interior.jpg" 
+              src="/working1.jpg" 
               alt="Premium Interior Maintenance & Fit-Out"
               fill
               className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
